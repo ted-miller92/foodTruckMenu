@@ -22,6 +22,18 @@
     $myitem5 = new FoodItem('item5', 3.35, 'This is Item five!');
     $myitem6 = new FoodItem('item6', 1.95, 'This is Item six!');
     
+    //get select option. 0 ~ $SelectMaxCnt;
+    function get_option($SelectMaxCnt, $slt_item){
+        $str = "";
+        for ($x = 0; $x <= $SelectMaxCnt; $x+=1) {
+            $str .= '<option value="'.$x.'"';
+            if (isset($_POST[$slt_item]) && $_POST[$slt_item] == $x) {
+                $str .=' selected="selected"'; 
+            }
+            $str .='>'.$x.'</option>';                                                  
+        }  
+        return $str;                
+    }
 ?>
 
 <script>
@@ -81,7 +93,7 @@
             if($(this).find(":selected").text() != '0'){
                 var d = <?php echo $myitem6->get_price();?>;
                 var name = '<?php echo $myitem6->get_name();?>';
-                var total = eval($(this).find(":selected").text() * d ).toFixed(2);            
+                var total = eval($(this).find(":selected").text() * d).toFixed(2);            
                 $('#Sp6').html('Total price of ' + name + ' are ' + total + ' dollars!');  
             }else{
                 $('#Sp6').html('');
@@ -100,15 +112,7 @@
             <p>Per Price: $<?php  echo $myitem1->get_price(); ?></p>
             <p>
                 <select name="slt_Item1" id="slt_Item1"> 
-                    <?php                      
-                        for ($x = 0; $x <= $SelectMaxCnt; $x+=1) {
-                            echo '<option value="'.$x.'"';
-                            if (isset($_POST['slt_Item2']) && $_POST['slt_Item1'] == $x) {
-                                echo ' selected="selected"'; 
-                            }
-                            echo '>'.$x.'</option>';                                                  
-                        }                  
-                    ?>
+                    <?php echo get_option($SelectMaxCnt, 'slt_Item1'); ?>   
                 </select>
                 <span id= "Sp1" class="text-red"></span> 
             </p>
@@ -119,13 +123,7 @@
             <p>Per Price: $<?php  echo $myitem2->get_price(); ?></p>
             <p>
                 <select name="slt_Item2" id="slt_Item2"> 
-                    <?php                      
-                        for ($x = 0; $x <= $SelectMaxCnt; $x+=1) {
-                            echo '<option value="'.$x.'"';
-                            if (isset($_POST['slt_Item2']) && $_POST['slt_Item2'] == $x) echo 'selected="selected"'; 
-                            echo '>'.$x.'</option>';
-                        }                    
-                    ?>   
+                    <?php echo get_option($SelectMaxCnt, 'slt_Item2'); ?>   
                 </select>
                 <span id= "Sp2" class="text-red"></span> 
             </p>
@@ -136,13 +134,7 @@
             <p>Per Price: $<?php  echo $myitem3->get_price(); ?></p>
             <p>
                 <select name="slt_Item3" id="slt_Item3"> 
-                    <?php                      
-                        for ($x = 0; $x <= $SelectMaxCnt; $x+=1) {
-                            echo '<option value="'.$x.'"';
-                            if (isset($_POST['slt_Item3']) && $_POST['slt_Item3'] == $x) echo 'selected="selected"'; 
-                            echo '>'.$x.'</option>';
-                        }                    
-                    ?>   
+                    <?php echo get_option($SelectMaxCnt, 'slt_Item3'); ?>   
                 </select>
                 <span id= "Sp3" class="text-red"></span> 
             </p>
@@ -153,13 +145,7 @@
             <p>Per Price: $<?php  echo $myitem4->get_price(); ?></p>
             <p>
                 <select name="slt_Item4" id="slt_Item4"> 
-                    <?php                      
-                        for ($x = 0; $x <= $SelectMaxCnt; $x+=1) {
-                            echo '<option value="'.$x.'"';
-                            if (isset($_POST['slt_Item4']) && $_POST['slt_Item4'] == $x) echo 'selected="selected"'; 
-                            echo '>'.$x.'</option>';
-                        }                    
-                    ?>   
+                    <?php echo get_option($SelectMaxCnt, 'slt_Item4'); ?>   
                 </select>
                 <span id= "Sp4" class="text-red"></span> 
             </p>
@@ -170,13 +156,7 @@
             <p>Per Price: $<?php  echo $myitem5->get_price(); ?></p>
             <p>
                 <select name="slt_Item5" id="slt_Item5"> 
-                    <?php                      
-                        for ($x = 0; $x <= $SelectMaxCnt; $x+=1) {
-                            echo '<option value="'.$x.'"';
-                            if (isset($_POST['slt_Item5']) && $_POST['slt_Item5'] == $x) echo 'selected="selected"'; 
-                            echo '>'.$x.'</option>';
-                        }                    
-                    ?>   
+                    <?php echo get_option($SelectMaxCnt, 'slt_Item5'); ?>   
                 </select>
                 <span id= "Sp5" class="text-red"></span> 
             </p>
@@ -187,18 +167,11 @@
             <p>Per Price: $<?php  echo $myitem6->get_price(); ?></p>
             <p>
                 <select name="slt_Item6" id="slt_Item6"> 
-                    <?php                      
-                        for ($x = 0; $x <= $SelectMaxCnt; $x+=1) {
-                            echo '<option value="'.$x.'"';
-                            if (isset($_POST['slt_Item6']) && $_POST['slt_Item6'] == $x) echo 'selected="selected"'; 
-                            echo '>'.$x.'</option>';
-                        }                    
-                    ?>   
+                    <?php echo get_option($SelectMaxCnt, 'slt_Item6'); ?>   
                 </select>
                 <span id= "Sp6" class="text-red"></span> 
             </p>
         </div>  
-
         <p>
             <div class="button">
                 <p><input class="calculate" type="submit" value="Calculate"></p>
