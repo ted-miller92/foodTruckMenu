@@ -8,6 +8,7 @@
 
 <script src="js/jquery-1.12.4.js"></script>
 <script src="js/jquery-ui.js"></script>
+<script src="js/index.js"></script>
 </head>
 <?php
     include 'FoodItem.php';
@@ -25,6 +26,25 @@
 ?>
 
 <script>
+    //rewrite the Select tag on change event;
+    //adding two attributes itemPrice,itemName in Select tag at below, line 127-129,line 149-151, line 149-151, line 169-173
+    //this way more brief, we dont need write 6 functions for all Select tags.
+    // $(document).ready(() => {
+    //     $("select").change(function () {
+    //          var selectObj = $(this);
+    //          var spanObj = selectObj.next();
+    //          if (selectObj.val() != "0") {
+    //             var price = selectObj.attr("itemPrice");
+    //             var name = selectObj.attr("itemName");
+    //             var total = (parseFloat(selectObj.val()) * parseFloat(price)).toFixed(2);
+    //             spanObj.html("Total price of " + name + " are " + total + " dollars!");
+    //         } else {
+    //             spanObj.html("");
+    //         }
+    //     });
+    // });
+
+
     // set select option event.
     $(document).ready(function() {        
         $("#slt_Item1").change(function() {
@@ -91,6 +111,11 @@
 
 </script>
 <body>
+    <!-- add the header tag here.
+    <header>
+        <p>Food Truck</p>
+    </header> 
+    -->
     <p>Food Truck</p>
     <hr>
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
@@ -99,6 +124,9 @@
             <p>Description: <?php  echo $myitem1->get_description(); ?></p>
             <p>Per Price: $<?php  echo $myitem1->get_price(); ?></p>
             <p>
+           <!-- <select name="slt_Item1" id="slt_Item1" 
+                itemName="<?=  $myitem1->get_name(); ?>"
+                itemPrice="<?=  $myitem1->get_price(); ?>" >  -->
                 <select name="slt_Item1" id="slt_Item1"> 
                     <?php                      
                         for ($x = 0; $x <= $SelectMaxCnt; $x+=1) {
@@ -118,6 +146,9 @@
             <p>Description: <?php  echo $myitem2->get_description(); ?></p>
             <p>Per Price: $<?php  echo $myitem2->get_price(); ?></p>
             <p>
+                  <!-- <select name="slt_Item1" id="slt_Item1" 
+                itemName="<?=  $myitem2->get_name(); ?>"
+                itemPrice="<?=  $myitem2->get_price(); ?>" >  -->
                 <select name="slt_Item2" id="slt_Item2"> 
                     <?php                      
                         for ($x = 0; $x <= $SelectMaxCnt; $x+=1) {
@@ -135,6 +166,12 @@
             <p>Description: <?php  echo $myitem3->get_description(); ?></p>
             <p>Per Price: $<?php  echo $myitem3->get_price(); ?></p>
             <p>
+                 <!-- <select name="slt_Item1" id="slt_Item1" 
+                itemName="<?=  $myitem3->get_name(); ?>"
+                itemPrice="<?=  $myitem3->get_price(); ?>" >  
+                repeat those changes in slt_Item4,slt_Item5,slt_Item6
+
+                -->
                 <select name="slt_Item3" id="slt_Item3"> 
                     <?php                      
                         for ($x = 0; $x <= $SelectMaxCnt; $x+=1) {
