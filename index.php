@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Food Truck - P3G1</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Voltaire&display=swap" rel="stylesheet">
-<link href="css/styles.css?003" type="text/css" rel="stylesheet">
+<link href="css/styles.css" type="text/css" rel="stylesheet">
 
 <script src="js/jquery-1.12.4.js"></script>
 <script src="js/jquery-ui.js"></script>
