@@ -250,7 +250,9 @@
             }
            
             if( $myTotal > 0){
-                echo '<p class="text-red"><b>Your final price are $'.number_format($myTotal,2).'</b></p>';
+                echo '<p class="text-red"><b>Your subtotal is $'.number_format($myTotal,2).'</b></p>';
+                $taxTotal = $myTotal * 1.06;
+                echo '<p class="text-red"><b>Your grand total is $'.number_format($taxTotal, 2).'</b></p>';
             }
         }
     ?>
