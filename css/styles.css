@@ -1,0 +1,30 @@
+
+
+
+
+.text-red {
+  color: red;
+}
+
+/*********************** FOOTER **********************************/
+footer {
+    line-height: 50px;
+    clear: both;
+    text-align: center;
+  }
+  
+  footer li {
+    list-style-type: none;
+    margin-left: 20px;
+    display: inline;
+  }
+  
+  footer a {
+    text-decoration: none;
+    color: black;
+    transition: ease-in-out .2s;
+  }
+  
+  footer a:hover {
+    color: red;  
+  }
