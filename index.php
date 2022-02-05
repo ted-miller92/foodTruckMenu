@@ -15,12 +15,12 @@
     $SelectMaxCnt = 20;
 
     // Set the value of food
-    $myitem1 = new FoodItem('item1', 9.25, 'This is Item one!');
-    $myitem2 = new FoodItem('item2', 8.63, 'This is Item two!');
-    $myitem3 = new FoodItem('item3', 4.00, 'This is Item three!');
-    $myitem4 = new FoodItem('item4', 8.52, 'This is Item four!');
-    $myitem5 = new FoodItem('item5', 3.35, 'This is Item five!');
-    $myitem6 = new FoodItem('item6', 1.95, 'This is Item six!');
+    $myitem1 = new FoodItem('Gyro', 9.25, 'It\'s a Gyro', 'gyro1.jpg');
+    $myitem2 = new FoodItem('Spanakopita', 8.63, 'It\'s Spanakopita', 'spanakopita.jpg');
+    $myitem3 = new FoodItem('Garlic Fries', 4.00, 'It\'s Garlic Fries', 'garlicFries.jpg');
+    $myitem4 = new FoodItem('Falafel', 8.52, 'It\'s Falafel', 'falafel.jpg');
+    $myitem5 = new FoodItem('Baklava', 3.35, 'It\'s Baklava', 'baklava.jpg');
+    $myitem6 = new FoodItem('Greek Salad', 7.95, 'It\'s Greek Salad', 'greekSalad.jpg');
     
     //get select option. 0 ~ $SelectMaxCnt;
     function get_option($SelectMaxCnt, $slt_item){
@@ -110,6 +110,7 @@
             <p>Product Name: <?php  echo $myitem1->get_name(); ?></p>
             <p>Description: <?php  echo $myitem1->get_description(); ?></p>
             <p>Per Price: $<?php  echo $myitem1->get_price(); ?></p>
+            <img class="food-image" src="<?= $myitem1->get_photo(); ?>" alt="<?= $myitem1->get_name(); ?>"/>
             <p>
                 <select name="slt_Item1" id="slt_Item1"> 
                     <?php echo get_option($SelectMaxCnt, 'slt_Item1'); ?>   
@@ -120,7 +121,7 @@
         <div>
             <p>Product Name: <?php  echo $myitem2->get_name(); ?></p>
             <p>Description: <?php  echo $myitem2->get_description(); ?></p>
-            <p>Per Price: $<?php  echo $myitem2->get_price(); ?></p>
+            <p>Per Price: $<?php  echo $myitem2->get_price(); ?></p><img class="food-image" src="<?= $myitem2->get_photo(); ?>" alt="<?= $myitem2->get_name(); ?>"/>
             <p>
                 <select name="slt_Item2" id="slt_Item2"> 
                     <?php echo get_option($SelectMaxCnt, 'slt_Item2'); ?>   
@@ -132,6 +133,7 @@
             <p>Product Name: <?php  echo $myitem3->get_name(); ?></p>
             <p>Description: <?php  echo $myitem3->get_description(); ?></p>
             <p>Per Price: $<?php  echo $myitem3->get_price(); ?></p>
+            <img class="food-image" src="<?= $myitem3->get_photo(); ?>" alt="<?= $myitem3->get_name(); ?>"/>
             <p>
                 <select name="slt_Item3" id="slt_Item3"> 
                     <?php echo get_option($SelectMaxCnt, 'slt_Item3'); ?>   
@@ -143,6 +145,7 @@
             <p>Product Name: <?php  echo $myitem4->get_name(); ?></p>
             <p>Description: <?php  echo $myitem4->get_description(); ?></p>
             <p>Per Price: $<?php  echo $myitem4->get_price(); ?></p>
+            <img class="food-image" src="<?= $myitem4->get_photo(); ?>" alt="<?= $myitem4->get_name(); ?>"/>
             <p>
                 <select name="slt_Item4" id="slt_Item4"> 
                     <?php echo get_option($SelectMaxCnt, 'slt_Item4'); ?>   
@@ -154,6 +157,7 @@
             <p>Product Name: <?php  echo $myitem5->get_name(); ?></p>
             <p>Description: <?php  echo $myitem5->get_description(); ?></p>
             <p>Per Price: $<?php  echo $myitem5->get_price(); ?></p>
+            <img class="food-image" src="<?= $myitem5->get_photo(); ?>" alt="<?= $myitem5->get_name(); ?>"/>
             <p>
                 <select name="slt_Item5" id="slt_Item5"> 
                     <?php echo get_option($SelectMaxCnt, 'slt_Item5'); ?>   
@@ -165,6 +169,7 @@
             <p>Product Name: <?php  echo $myitem6->get_name(); ?></p>
             <p>Description: <?php  echo $myitem6->get_description(); ?></p>
             <p>Per Price: $<?php  echo $myitem6->get_price(); ?></p>
+            <img class="food-image" src="<?= $myitem6->get_photo(); ?>" alt="<?= $myitem6->get_name(); ?>"/>
             <p>
                 <select name="slt_Item6" id="slt_Item6"> 
                     <?php echo get_option($SelectMaxCnt, 'slt_Item6'); ?>   
@@ -223,7 +228,9 @@
             }
            
             if( $myTotal > 0){
-                echo '<p class="text-red"><b>Your final price are $'.number_format($myTotal,2).'</b></p>';
+                echo '<p class="text-red"><b>Your subtotal is $'.number_format($myTotal,2).'</b></p>';
+                $taxTotal = $myTotal * 1.06;
+                echo '<p class="text-red"><b>Your grand total is $'.number_format($taxTotal, 2).'</b></p>';
             }
         }
     ?>
