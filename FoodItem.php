@@ -1,18 +1,24 @@
 <?php
 
 class FoodItem{
+    public $ID = 0;
     public $name = '';
     public $price = 0 ;
     public $description = '';
     public $count = 0;
     public $photo = '';
 
-    public function __construct($name, $price, $description, $photo){
+    public function __construct($ID, $name, $price, $description, $photo){
+        $this-> ID = $ID;
         $this-> name = $name;
         $this-> price = $price;
         $this-> description = $description;
         $this-> photo = './images/' . $photo;
 
+    }
+
+    public function get_ID(){
+        return $this->ID;
     }
 
     public function get_name(){
