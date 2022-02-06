@@ -228,9 +228,11 @@
             }
            
             if( $myTotal > 0){
-                echo '<p class="text-red"><b>Your subtotal is $'.number_format($myTotal,2).'</b></p>';
-                $taxTotal = $myTotal * 1.06;
-                echo '<p class="text-red"><b>Your grand total is $'.number_format($taxTotal, 2).'</b></p>';
+                echo '<p class="text-red">Subtotal: $'.number_format($myTotal,2).'</p>';
+                $tax = $myTotal * 0.06;
+                $grandTotal = $myTotal + $tax;
+                echo '<p class="text-red">Tax: $'.number_format($tax, 2).'</p>';
+                echo '<p class="text-red"><b>Grand total: $'.number_format($grandTotal, 2).'</b></p>';
             }
         }
     ?>
