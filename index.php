@@ -44,7 +44,7 @@
                 var d = $("#hid_price_"+ aryid[1]).val();
                 var name = $("#hid_name_"+ aryid[1]).val();
                 var total = eval($(this).find(":selected").text() * d).toFixed(2);            
-                $('#Sp'+ aryid[1]).html('Total price of ' + name + ' are ' + total + ' dollars!');  
+                $('#Sp'+ aryid[1]).html('Total price of ' + name + ' = $' + total + '');  
             }else{
                 $('#Sp'+ aryid[1]).html('');
             }   
@@ -54,58 +54,73 @@
 </script>
 
 <body>
-    <p>Food Truck</p>
+    <h1 class="title">It's Da Foodtruck</h1>
     <hr>
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+
+    <div id="wrapper">
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="food" method="POST">
+        <fieldset id="menu">
         <?
             for ($i = 0; $i <= count($myitems) - 1; $i++) {  
-                echo '<div>';
-                echo    '<p>Product Name:'.$myitems[$i]->get_name().'</p>';
-                echo    '<p>Description:'.$myitems[$i]->get_description().'</p>';
-                echo    '<p>Per Price: $'.$myitems[$i]->get_price().'</p>';
+                echo '<div class="food-card">';
                 echo    '<img class="food-image" src="'.$myitems[$i]->get_photo().'" alt="'.$myitems[$i]->get_name().'"/>';
                 echo    '<p>';
-                echo        '<select name="sltItem_'.$i.'" id="sltItem_'.$i.'">'; 
+                echo    '<p class="food-name margin-bot">'.$myitems[$i]->get_name().'</p>';
+                echo    '<p class="margin-bot">'.$myitems[$i]->get_description().'</p>';
+                echo    '<p class="margin-bot">$'.$myitems[$i]->get_price().'</p>';
+
+                echo        '<select class="margin-bot select-box" name="sltItem_'.$i.'" id="sltItem_'.$i.'">'; 
                 echo            get_option($SelectMaxCnt, 'sltItem_'.$i.'');  
-                echo        '</select>';                
+                echo        '</select>';  
+                              
                 echo        '<input type="hidden" id="hid_name_'.$i.'" value="'.$myitems[$i]->get_name().'">';
                 echo        '<input type="hidden" id="hid_price_'.$i.'" value="'.$myitems[$i]->get_price().'">';
                 echo    '</p>';
                 echo    '<span id= "Sp'.$i.'" class="text-red"></span>';
                 echo '</div>';
             }        
-        ?>        
-        <p>
-            <div class="button">
-                <p><input class="calculate" type="submit" value="Calculate"></p>
-                <p><a class="reset" href="">Reset</a></p>
-            </div>
-        </p>
-
+        ?>    
+        </fieldset>    
     </form>  
+
     <!-- Calculate Button Submit: Calculate the final price and list what was ordered.-->
-    <?php
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $myTotal = 0;
-            $tmpVal = 0;
-            for ($i = 0; $i <= count($myitems) - 1; $i++) {
-                $myitems[$i]->set_count($_POST['sltItem_'.$i.'']);
-                if($myitems[$i]->get_count() != 0){
-                    $tmpVal = number_format($myitems[$i]->get_count() * $myitems[$i]->get_price(), 2 );
-                    echo '<p class="text-red">You ordered '.$myitems[$i]->get_count().' '.$myitems[$i]->get_name().' and this total price are <b>$'.$tmpVal.'</b></p>';
-                    $myTotal += $tmpVal;
+    <div class="checkout">
+        <h1 class="title">Checkout</h1>
+        <div class="total-amount">
+        <?php
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $myTotal = 0;
+                $tmpVal = 0;
+                for ($i = 0; $i <= count($myitems) - 1; $i++) {
+                    $myitems[$i]->set_count($_POST['sltItem_'.$i.'']);
+                    if($myitems[$i]->get_count() != 0){
+                        $tmpVal = number_format($myitems[$i]->get_count() * $myitems[$i]->get_price(), 2 );
+                        echo '
+                            <p class="margin-bot">'.$myitems[$i]->get_count().' x '.$myitems[$i]->get_name().' = <b>$'.$tmpVal.'</b></p>
+                            ';
+                        $myTotal += $tmpVal;
+                    }
+                }
+
+                if( $myTotal > 0){
+                    echo '<p class="margin-bot">Subtotal: $'.number_format($myTotal,2).'</p>';
+                    $tax = $myTotal * 0.06;
+                    $grandTotal = $myTotal + $tax;
+                    echo '<p class="margin-bot">Tax: $'.number_format($tax, 2).'</p>';
+                    echo '<p class=""><b>Grand total: $'.number_format($grandTotal, 2).'</b></p>';
                 }
             }
+        ?>
+        </div> <!-- end of total amount div -->
+            
+        <div class="button">
+                <p><input class="calculate" type="submit" form="food" value="Calculate"></p>
+                <p><div class="calculate"><a class="reset" href="">Reset</a></div></p>
+            </div>
+        </div> <!-- end of checkout -->
 
-            if( $myTotal > 0){
-                echo '<p class="text-red">Subtotal: $'.number_format($myTotal,2).'</p>';
-                $tax = $myTotal * 0.06;
-                $grandTotal = $myTotal + $tax;
-                echo '<p class="text-red">Tax: $'.number_format($tax, 2).'</p>';
-                echo '<p class="text-red"><b>Grand total: $'.number_format($grandTotal, 2).'</b></p>';
-            }
-        }
-    ?>
+    </div> <!-- end of wrapper -->
+    
     <hr>
     <footer>
         <ul>

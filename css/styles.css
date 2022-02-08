@@ -1,16 +1,84 @@
-
-
-
-
+/* food truck styles.css */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(241, 237, 232);
+}
 .text-red {
   color: red;
 }
-
+.title {
+  text-align: center;
+  font-size: 1.2em;
+}
+#wrapper {
+  border: 1px black solid;
+  display: grid;
+  grid-template-columns: [menu] 2fr [checking-out] 1fr;
+}
+#menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: none;
+}
+/* food card section  *****************************/
+.food-card {
+  background-color: rgb(230, 218, 218);
+  margin: 0.5vh;
+  width: 35vh;
+  height: 45vh;
+  text-align: center;
+}
+.food-image {
+  width: 100%;
+  height: 50%;
+}
+.food-name {
+  font-size: 1.5em;
+}
+.margin-bot {
+  margin-bottom: 1vh;
+}
+.select-box {
+  width: 10vh;
+}
+/* checkout section ************************/
+.checkout {
+  border: 1px black solid;
+}
+.total-amount {
+  background-color: rgb(218, 209, 209);
+  width: 100%;
+  height: 400px;
+  padding: 1vh;
+  font-size: 1.4em;
+}
+.calculate {
+  width: 20vh;
+  height: 7vh;
+  background-color: rgb(190, 65, 19);
+  color: white;
+  border: none;
+  font-size: 1.5em;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 1vh;
+}
+.reset {
+  text-decoration: none;
+  font-size: 1.5em;
+  cursor: pointer;
+}
 /*********************** FOOTER **********************************/
 footer {
     line-height: 50px;
     clear: both;
     text-align: center;
+    background-color: rgb(156, 156, 156);
   }
   
   footer li {
