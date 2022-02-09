@@ -57,24 +57,31 @@
     <p>Food Truck</p>
     <hr>
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-        <?
-            for ($i = 0; $i <= count($myitems) - 1; $i++) {  
-                echo '<div>';
-                echo    '<p>Product Name:'.$myitems[$i]->get_name().'</p>';
-                echo    '<p>Description:'.$myitems[$i]->get_description().'</p>';
-                echo    '<p>Per Price: $'.$myitems[$i]->get_price().'</p>';
-                echo    '<img class="food-image" src="'.$myitems[$i]->get_photo().'" alt="'.$myitems[$i]->get_name().'"/>';
-                echo    '<p>';
-                echo        '<select name="sltItem_'.$i.'" id="sltItem_'.$i.'">'; 
-                echo            get_option($SelectMaxCnt, 'sltItem_'.$i.'');  
-                echo        '</select>';                
-                echo        '<input type="hidden" id="hid_name_'.$i.'" value="'.$myitems[$i]->get_name().'">';
-                echo        '<input type="hidden" id="hid_price_'.$i.'" value="'.$myitems[$i]->get_price().'">';
-                echo    '</p>';
-                echo    '<span id= "Sp'.$i.'" class="text-red"></span>';
-                echo '</div>';
-            }        
-        ?>        
+        <?php
+            for ($i = 0; $i <= count($myitems) - 1; $i++): 
+                $name = $myitems[$i]->get_name();
+                $description = $myitems[$i]->get_description();
+                $price = $myitems[$i]->get_price();
+                $photo = $myitems[$i]->get_photo();
+
+        ?>
+                <div>
+                    <p>Product Name: <?=  $name ?></p>
+                    <p>Description: <?= $description ?></p>
+                    <p>Per Price: <?= $price ?></p>
+                    <img class="food-image" src="<?= $photo ?>" alt="<?= $photo ?>"/>
+                    <p>
+                        <select name="sltItem_<?= $i ?>" id="sltItem_<?= $i ?>">
+                            <?=  get_option($SelectMaxCnt, 'sltItem_'.$i.''); ?>
+                        </select>
+                        <input type="hidden" id="hid_name_<?= $i ?>" value="<?= $name ?>">
+                        <input type="hidden" id="hid_price_<?= $i ?>" value="<?= $price ?>">
+                    </p>
+                    <span id= "Sp<?= $i?>" class="text-red"></span>
+                </div>
+        <?php 
+            endfor; 
+        ?>      
         <p>
             <div class="button">
                 <p><input class="calculate" type="submit" value="Calculate"></p>
