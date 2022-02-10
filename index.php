@@ -66,8 +66,8 @@
                 echo    '<img class="food-image" src="'.$myitems[$i]->get_photo().'" alt="'.$myitems[$i]->get_name().'"/>';
                 echo    '<p>';
                 echo    '<p class="food-name margin-bot">'.$myitems[$i]->get_name().'</p>';
-                echo    '<p class="margin-bot">'.$myitems[$i]->get_description().'</p>';
-                echo    '<p class="margin-bot">$'.$myitems[$i]->get_price().'</p>';
+                echo    '<p class="food-description margin-bot">'.$myitems[$i]->get_description().'</p>';
+                echo    '<p class="food-description margin-bot">$'.$myitems[$i]->get_price().'</p>';
 
                 echo        '<select class="margin-bot select-box" name="sltItem_'.$i.'" id="sltItem_'.$i.'">'; 
                 echo            get_option($SelectMaxCnt, 'sltItem_'.$i.'');  
@@ -76,7 +76,7 @@
                 echo        '<input type="hidden" id="hid_name_'.$i.'" value="'.$myitems[$i]->get_name().'">';
                 echo        '<input type="hidden" id="hid_price_'.$i.'" value="'.$myitems[$i]->get_price().'">';
                 echo    '</p>';
-                echo    '<span id= "Sp'.$i.'" class="text-red"></span>';
+                echo    '<span id="Sp'.$i.'" class="food-price text-red"></span>';
                 echo '</div>';
             }        
         ?>    
@@ -103,10 +103,10 @@
                 }
 
                 if( $myTotal > 0){
-                    echo '<p class="margin-bot">Subtotal: $'.number_format($myTotal,2).'</p>';
+                    echo '<p class="margin-bot">Subtotal: $<b>'.number_format($myTotal,2).'</b></p>';
                     $tax = $myTotal * 0.06;
                     $grandTotal = $myTotal + $tax;
-                    echo '<p class="margin-bot">Tax: $'.number_format($tax, 2).'</p>';
+                    echo '<p class="margin-bot">Tax: $<b>'.number_format($tax, 2).'</b></p>';
                     echo '<p class=""><b>Grand total: $'.number_format($grandTotal, 2).'</b></p>';
                 }
             }
