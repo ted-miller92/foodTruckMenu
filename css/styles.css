@@ -1,30 +1,133 @@
-
-
-
-
+/* food truck styles.css */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(241, 237, 232);
+}
 .text-red {
   color: red;
 }
-
+.title {
+  text-align: center;
+  font-size: 1.2em;
+}
+#wrapper {
+  border: 1px black solid;
+  display: grid;
+  grid-template-columns: [menu] 2fr [checking-out] 1fr;
+}
+#menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: none;
+}
+/* food card section  *****************************/
+.food-card {
+  background-color: rgb(230, 218, 218);
+  margin: 0.5vh;
+  width: 35vh;
+  height: 45vh;
+  text-align: center;
+}
+.food-image {
+  width: 100%;
+  height: 50%;
+}
+.food-name {
+  font-size: 1.5em;
+}
+.food-description {
+  font-size: 1em;
+}
+.food-price {
+  font-size: 1em;
+}
+.margin-bot {
+  margin-bottom: 1vh;
+}
+.select-box {
+  width: 10vh;
+  height: 3vh;
+}
+/* checkout section ************************/
+.checkout {
+  border: 1px black solid;
+  position: sticky;
+    top: 0;
+    right: 10;
+  height: 600px;
+}
+.total-amount {
+  background-color: rgb(218, 209, 209);
+  width: 100%;
+  height: 400px;
+  padding: 1vh;
+  font-size: 1.4em;
+}
+.calculate {
+  width: 20vh;
+  height: 7vh;
+  background-color: rgb(190, 65, 19);
+  color: white;
+  border: none;
+  font-size: 1.5em;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 1vh;
+}
+.reset {
+  text-decoration: none;
+  font-size: 1.5em;
+  cursor: pointer;
+}
 /*********************** FOOTER **********************************/
 footer {
     line-height: 50px;
     clear: both;
     text-align: center;
+    background-color: rgb(156, 156, 156);
+    width: 100%;
+    position: fixed;
+      bottom: 0;
+}
+footer li {
+  list-style-type: none;
+  margin-left: 20px;
+  display: inline;
+}
+footer a {
+  text-decoration: none;
+  color: black;
+  transition: ease-in-out .2s;
+}
+footer a:hover {
+  color: red;  
+}
+/* media section **************************** */
+@media only screen and (max-width: 769px) {
+  .food-name {
+    font-size: 2em;
   }
-  
-  footer li {
-    list-style-type: none;
-    margin-left: 20px;
-    display: inline;
+  .food-description {
+    font-size: 1.5em;
   }
-  
-  footer a {
-    text-decoration: none;
-    color: black;
-    transition: ease-in-out .2s;
+  .food-price {
+    font-size: 1.1em;
   }
-  
-  footer a:hover {
-    color: red;  
+  .total-amount {
+    font-size: 1.2em;
   }
+}
+/* end of tablet */
+@media only screen and (max-width: 426px) {
+  .food-card {
+    margin: 0.5vh;
+    width: 25vh;
+    height: 30vh;
+  }
+}
+/* end of mobile */

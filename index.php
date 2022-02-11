@@ -44,7 +44,7 @@
                 var d = $("#hid_price_"+ aryid[1]).val();
                 var name = $("#hid_name_"+ aryid[1]).val();
                 var total = eval($(this).find(":selected").text() * d).toFixed(2);            
-                $('#Sp'+ aryid[1]).html('Total price of ' + name + ' are ' + total + ' dollars!');  
+                $('#Sp'+ aryid[1]).html('Total price of ' + name + ' = $' + total + '');  
             }else{
                 $('#Sp'+ aryid[1]).html('');
             }   
@@ -54,8 +54,9 @@
 </script>
 
 <body>
-    <p>Food Truck</p>
+    <h1 class="title">It's Da Foodtruck</h1>
     <hr>
+    <div id="wrapper">
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <?php
             for ($i = 0; $i <= count($myitems) - 1; $i++): 
@@ -63,56 +64,64 @@
                 $description = $myitems[$i]->get_description();
                 $price = $myitems[$i]->get_price();
                 $photo = $myitems[$i]->get_photo();
-
         ?>
-                <div>
-                    <p>Product Name: <?=  $name ?></p>
-                    <p>Description: <?= $description ?></p>
-                    <p>Per Price: <?= $price ?></p>
+                <div class="food-card">
                     <img class="food-image" src="<?= $photo ?>" alt="<?= $photo ?>"/>
+                    <p class="food-name margin-bot">Product Name: <?=  $name ?></p>
+                    <p class="food-description margin-bot">Description: <?= $description ?></p>
+                    <p class="food-description margin-bot">Per Price: <?= $price ?></p>
                     <p>
-                        <select name="sltItem_<?= $i ?>" id="sltItem_<?= $i ?>">
+                        <select class="margin-bot select-box" name="sltItem_<?= $i ?>" id="sltItem_<?= $i ?>">
                             <?=  get_option($SelectMaxCnt, 'sltItem_'.$i.''); ?>
                         </select>
                         <input type="hidden" id="hid_name_<?= $i ?>" value="<?= $name ?>">
                         <input type="hidden" id="hid_price_<?= $i ?>" value="<?= $price ?>">
                     </p>
                     <span id= "Sp<?= $i?>" class="text-red"></span>
-                </div>
+                </div> <!-- end food-card-->
         <?php 
             endfor; 
         ?>      
-        <p>
-            <div class="button">
-                <p><input class="calculate" type="submit" value="Calculate"></p>
-                <p><a class="reset" href="">Reset</a></p>
-            </div>
-        </p>
-
     </form>  
+
     <!-- Calculate Button Submit: Calculate the final price and list what was ordered.-->
-    <?php
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $myTotal = 0;
-            $tmpVal = 0;
-            for ($i = 0; $i <= count($myitems) - 1; $i++) {
-                $myitems[$i]->set_count($_POST['sltItem_'.$i.'']);
-                if($myitems[$i]->get_count() != 0){
-                    $tmpVal = number_format($myitems[$i]->get_count() * $myitems[$i]->get_price(), 2 );
-                    echo '<p class="text-red">You ordered '.$myitems[$i]->get_count().' '.$myitems[$i]->get_name().' and this total price are <b>$'.$tmpVal.'</b></p>';
-                    $myTotal += $tmpVal;
+    <div class="checkout">
+        <h1 class="title">Checkout</h1>
+        <div class="total-amount">
+        <?php
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $myTotal = 0;
+                $tmpVal = 0;
+                for ($i = 0; $i <= count($myitems) - 1; $i++) {
+                    $myitems[$i]->set_count($_POST['sltItem_'.$i.'']);
+                    if($myitems[$i]->get_count() != 0){
+                        $tmpVal = number_format($myitems[$i]->get_count() * $myitems[$i]->get_price(), 2 );
+                        echo '
+                            <p class="margin-bot">'.$myitems[$i]->get_count().' x '.$myitems[$i]->get_name().' = <b>$'.$tmpVal.'</b></p>
+                            ';
+                        $myTotal += $tmpVal;
+                    }
+                }
+
+                if( $myTotal > 0){
+                    echo '<p class="margin-bot">Subtotal: $<b>'.number_format($myTotal,2).'</b></p>';
+                    $tax = $myTotal * 0.06;
+                    $grandTotal = $myTotal + $tax;
+                    echo '<p class="margin-bot">Tax: $<b>'.number_format($tax, 2).'</b></p>';
+                    echo '<p class=""><b>Grand total: $'.number_format($grandTotal, 2).'</b></p>';
                 }
             }
+        ?>
+        </div> <!-- end of total amount div -->
+            
+        <div class="button">
+                <p><input class="calculate" type="submit" form="food" value="Calculate"></p>
+                <p><div class="calculate"><a class="reset" href="">Reset</a></div></p>
+            </div>
+        </div> <!-- end of checkout -->
 
-            if( $myTotal > 0){
-                echo '<p class="text-red">Subtotal: $'.number_format($myTotal,2).'</p>';
-                $tax = $myTotal * 0.06;
-                $grandTotal = $myTotal + $tax;
-                echo '<p class="text-red">Tax: $'.number_format($tax, 2).'</p>';
-                echo '<p class="text-red"><b>Grand total: $'.number_format($grandTotal, 2).'</b></p>';
-            }
-        }
-    ?>
+    </div> <!-- end of wrapper -->
+    
     <hr>
     <footer>
         <ul>
