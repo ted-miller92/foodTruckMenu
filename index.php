@@ -56,31 +56,32 @@
 <body>
     <h1 class="title">It's Da Foodtruck</h1>
     <hr>
-
     <div id="wrapper">
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="food" method="POST">
-        <fieldset id="menu">
-        <?
-            for ($i = 0; $i <= count($myitems) - 1; $i++) {  
-                echo '<div class="food-card">';
-                echo    '<img class="food-image" src="'.$myitems[$i]->get_photo().'" alt="'.$myitems[$i]->get_name().'"/>';
-                echo    '<p>';
-                echo    '<p class="food-name margin-bot">'.$myitems[$i]->get_name().'</p>';
-                echo    '<p class="food-description margin-bot">'.$myitems[$i]->get_description().'</p>';
-                echo    '<p class="food-description margin-bot">$'.$myitems[$i]->get_price().'</p>';
-
-                echo        '<select class="margin-bot select-box" name="sltItem_'.$i.'" id="sltItem_'.$i.'">'; 
-                echo            get_option($SelectMaxCnt, 'sltItem_'.$i.'');  
-                echo        '</select>';  
-                              
-                echo        '<input type="hidden" id="hid_name_'.$i.'" value="'.$myitems[$i]->get_name().'">';
-                echo        '<input type="hidden" id="hid_price_'.$i.'" value="'.$myitems[$i]->get_price().'">';
-                echo    '</p>';
-                echo    '<span id="Sp'.$i.'" class="food-price text-red"></span>';
-                echo '</div>';
-            }        
-        ?>    
-        </fieldset>    
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+        <?php
+            for ($i = 0; $i <= count($myitems) - 1; $i++): 
+                $name = $myitems[$i]->get_name();
+                $description = $myitems[$i]->get_description();
+                $price = $myitems[$i]->get_price();
+                $photo = $myitems[$i]->get_photo();
+        ?>
+                <div class="food-card">
+                    <img class="food-image" src="<?= $photo ?>" alt="<?= $photo ?>"/>
+                    <p class="food-name margin-bot">Product Name: <?=  $name ?></p>
+                    <p class="food-description margin-bot">Description: <?= $description ?></p>
+                    <p class="food-description margin-bot">Per Price: <?= $price ?></p>
+                    <p>
+                        <select class="margin-bot select-box" name="sltItem_<?= $i ?>" id="sltItem_<?= $i ?>">
+                            <?=  get_option($SelectMaxCnt, 'sltItem_'.$i.''); ?>
+                        </select>
+                        <input type="hidden" id="hid_name_<?= $i ?>" value="<?= $name ?>">
+                        <input type="hidden" id="hid_price_<?= $i ?>" value="<?= $price ?>">
+                    </p>
+                    <span id= "Sp<?= $i?>" class="text-red"></span>
+                </div> <!-- end food-card-->
+        <?php 
+            endfor; 
+        ?>      
     </form>  
 
     <!-- Calculate Button Submit: Calculate the final price and list what was ordered.-->
