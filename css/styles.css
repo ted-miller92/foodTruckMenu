@@ -5,21 +5,20 @@
   box-sizing: border-box;
 }
 body {
-  background-color: rgb(241, 237, 232);
+  background-color: rgb(246, 246, 246);
 }
 .text-red {
-  color: red;
+  color: rgb(206, 1, 1);
 }
 .title {
   text-align: center;
   font-size: 1.2em;
 }
 #wrapper {
-  border: 1px black solid;
   display: grid;
   grid-template-columns: [menu] 2fr [checking-out] 1fr;
 }
-#menu {
+#food {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -27,10 +26,11 @@ body {
 }
 /* food card section  *****************************/
 .food-card {
-  background-color: rgb(230, 218, 218);
-  margin: 0.5vh;
-  width: 35vh;
-  height: 45vh;
+  box-shadow: 5px 5px 10px rgb(195, 193, 193);
+  background-color: rgb(240, 240, 240);
+  margin: 0.5vh 1vw;
+  width: 315px;
+  height: 410px;
   text-align: center;
 }
 .food-image {
@@ -50,28 +50,30 @@ body {
   margin-bottom: 1vh;
 }
 .select-box {
-  width: 10vh;
+  width: 8vw;
   height: 3vh;
+  cursor: pointer;
 }
 /* checkout section ************************/
 .checkout {
-  border: 1px black solid;
+  background-color: rgb(233, 227, 227);
+  box-shadow: 5px 5px 10px rgb(195, 193, 193);
   position: sticky;
     top: 0;
-    right: 10;
   height: 600px;
+  width: 15vw;
 }
 .total-amount {
-  background-color: rgb(218, 209, 209);
   width: 100%;
   height: 400px;
   padding: 1vh;
+  border-top: 1px solid grey;
   font-size: 1.4em;
 }
 .calculate {
-  width: 20vh;
+  width: 100%;
   height: 7vh;
-  background-color: rgb(190, 65, 19);
+  background-color: rgb(216, 77, 27);
   color: white;
   border: none;
   font-size: 1.5em;
@@ -81,8 +83,7 @@ body {
 }
 .reset {
   text-decoration: none;
-  font-size: 1.5em;
-  cursor: pointer;
+  font-size: 1.4em;
 }
 /*********************** FOOTER **********************************/
 footer {
@@ -108,26 +109,64 @@ footer a:hover {
   color: red;  
 }
 /* media section **************************** */
-@media only screen and (max-width: 769px) {
+@media only screen and (max-width: 1441px) {
+  .checkout {
+    width: 25vw;
+  }
+}
+@media only screen and (max-width: 1025px) {
   .food-name {
-    font-size: 2em;
+    font-size: 1.5em;
   }
   .food-description {
-    font-size: 1.5em;
+    font-size: 1.1em;
   }
   .food-price {
     font-size: 1.1em;
   }
+  .food-card {
+    margin: 0.5vh;
+    width: 300px;
+    height: 390px;
+  }
   .total-amount {
     font-size: 1.2em;
+    height: 100%;
+  }
+  .checkout {
+    height: 50vh;
   }
 }
 /* end of tablet */
 @media only screen and (max-width: 426px) {
+  #wrapper {
+    grid-template-columns: [menu] 2fr [checking-out] 2fr;
+  }
+  .food-name {
+    font-size: 1.2em;
+  }
+  .food-description {
+    font-size: 1em;
+  }
+  .food-price {
+    font-size: 1em;
+  }
   .food-card {
-    margin: 0.5vh;
-    width: 25vh;
-    height: 30vh;
+    margin-bottom: 1vh;
+    width: 290px;
+    height: 380px; 
+  }
+  .checkout {
+    height: 40vh;
+    width:100%;
+  }
+  .select-box {
+    width: 10vw;
+    height: 2vh;
+  }
+  .calculate {
+    width: 100%;
+    height: 5vh;
   }
 }
 /* end of mobile */
