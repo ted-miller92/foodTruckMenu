@@ -57,72 +57,73 @@
     <h1 class="title">It's Da Foodtruck</h1>
     <hr>
     <div id="wrapper">
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" id="food">
-            <?php
-                for ($i = 0; $i <= count($myitems) - 1; $i++): 
-                    $name = $myitems[$i]->get_name();
-                    $description = $myitems[$i]->get_description();
-                    $price = $myitems[$i]->get_price();
-                    $photo = $myitems[$i]->get_photo();
-            ?>
-                    <div class="food-card">
-                        <img class="food-image" src="<?= $photo ?>" alt="<?= $photo ?>"/>
-                        <p class="food-name margin-bot">Product Name: <?=  $name ?></p>
-                        <p class="food-description margin-bot">Description: <?= $description ?></p>
-                        <p class="food-description margin-bot">Per Price: <?= $price ?></p>
-                        <p>
-                            <select class="margin-bot select-box" name="sltItem_<?=$i?>" id="sltItem_<?=$i?>">
-                                <?=  get_option($SelectMaxCnt, 'sltItem_'.$i.''); ?>
-                            </select>
-                            <input type="hidden" id="hid_name_<?= $i ?>" value="<?= $name ?>">
-                            <input type="hidden" id="hid_price_<?= $i ?>" value="<?= $price ?>">
-                        </p>
-                        <span id= "Sp<?= $i?>" class="text-red"></span>
-                    </div> <!-- end food-card-->
-            <?php 
-                endfor; 
-            ?>      
-            
-        </form>
-        
-        <!-- Calculate Button Submit: Calculate the final price and list what was ordered.-->
-        <div class="button">
-                <p><input class="calculate" type="submit" form="food" value="Calculate"></p>
-                <p><div class="calculate"><a class="reset" href="">Reset</a></div></p>
-        </div>  
+            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" id="food">
+                <?php
+                    for ($i = 0; $i <= count($myitems) - 1; $i++): 
+                        $name = $myitems[$i]->get_name();
+                        $description = $myitems[$i]->get_description();
+                        $price = $myitems[$i]->get_price();
+                        $photo = $myitems[$i]->get_photo();
+                ?>
+                        <div class="food-card">
+                            <img class="food-image" src="<?= $photo ?>" alt="<?= $photo ?>"/>
+                            <p class="food-name margin-bot"><?=  $name ?></p>
+                            <p class="food-description margin-bot"><?= $description ?></p>
+                            <p class="food-description margin-bot">$<?= $price ?></p>
+                            <p>
+                                <select class="margin-bot select-box" name="sltItem_<?=$i?>" id="sltItem_<?=$i?>">
+                                    <?=  get_option($SelectMaxCnt, 'sltItem_'.$i.''); ?>
+                                </select>
+                                <input type="hidden" id="hid_name_<?= $i ?>" value="<?= $name ?>">
+                                <input type="hidden" id="hid_price_<?= $i ?>" value="<?= $price ?>">
+                            </p>
+                            <span id= "Sp<?= $i?>" class="text-red"></span>
+                        </div> <!-- end food-card-->
+                <?php 
+                    endfor; 
+                ?>      
+                
+            </form>
+            <!-- end of form -->
         
         <div class="checkout">
             <h1 class="title">Checkout</h1>
+
             <div class="total-amount">
-            <?php
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $myTotal = 0;
-                    $tmpVal = 0;
-                    for ($i = 0; $i <= count($myitems) - 1; $i++) {
-                        $myitems[$i]->set_count($_POST['sltItem_'.$i.'']);
-                        if($myitems[$i]->get_count() != 0){
-                            $tmpVal = number_format($myitems[$i]->get_count() * $myitems[$i]->get_price(), 2 );
-                            echo '
-                                <p class="margin-bot">'.$myitems[$i]->get_count().' x '.$myitems[$i]->get_name().' = <b>$'.$tmpVal.'</b></p>
-                                ';
-                            $myTotal += $tmpVal;
+                <?php
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        $myTotal = 0;
+                        $tmpVal = 0;
+                        for ($i = 0; $i <= count($myitems) - 1; $i++) {
+                            $myitems[$i]->set_count($_POST['sltItem_'.$i.'']);
+                            if($myitems[$i]->get_count() != 0){
+                                $tmpVal = number_format($myitems[$i]->get_count() * $myitems[$i]->get_price(), 2 );
+                                echo '
+                                    <p class="margin-bot">'.$myitems[$i]->get_count().' x '.$myitems[$i]->get_name().' = <b>$'.$tmpVal.'</b></p>
+                                    ';
+                                $myTotal += $tmpVal;
+                            }
+                        }
+                        if( $myTotal > 0){
+                            echo '<p class="margin-bot">Subtotal: $<b>'.number_format($myTotal,2).'</b></p>';
+                            $tax = $myTotal * 0.06;
+                            $grandTotal = $myTotal + $tax;
+                            echo '<p class="margin-bot">Tax: $<b>'.number_format($tax, 2).'</b></p>';
+                            echo '<p class="margin-bot"><b>Grand total: $'.number_format($grandTotal, 2).'</b></p>';
                         }
                     }
-                    if( $myTotal > 0){
-                        echo '<p class="margin-bot">Subtotal: $<b>'.number_format($myTotal,2).'</b></p>';
-                        $tax = $myTotal * 0.06;
-                        $grandTotal = $myTotal + $tax;
-                        echo '<p class="margin-bot">Tax: $<b>'.number_format($tax, 2).'</b></p>';
-                        echo '<p class="margin-bot"><b>Grand total: $'.number_format($grandTotal, 2).'</b></p>';
-                    }
-                echo '</div> <!-- end class total-amount -->';
-                echo '</div><!-- end class checkout -->';
-                }
-            ?>
+                ?>
             </div><!-- end class total-amount -->
+
+            <!-- Calculate Button Submit: Calculate the final price and list what was ordered.-->
+            <div class="button">
+                    <p><input class="calculate" type="submit" form="food" value="CHECK OUT"></p>
+                    <p><div class="calculate"><a class="reset" href="">RESET</a></div></p>
+            </div>  
+
         </div><!-- end class checkout -->
     </div> <!-- end of wrapper -->
-    <hr>
+
     <footer>
         <ul>
             <li>Copyright &copy;
