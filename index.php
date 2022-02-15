@@ -120,7 +120,8 @@
             </div>  
 
         </div><!-- end class checkout -->
-        <footer>
+    </div> <!-- end of wrapper -->    
+    <footer>
             <ul>
                 <li>Copyright &copy;
                     <?php
@@ -139,7 +140,6 @@
                 <li><a href="https://github.com/sea-hank" target="_blank">Yingheng he</a></li>
             </ul>
         </footer>
-    </div> <!-- end of wrapper -->    
 </body>
 </html>
 
