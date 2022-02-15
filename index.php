@@ -50,41 +50,39 @@
             }   
         });
     });  
-
 </script>
 
 <body>
     <h1 class="title">It's Da Foodtruck</h1>
     <hr>
     <div id="wrapper">
-            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" id="food">
-                <?php
-                    for ($i = 0; $i <= count($myitems) - 1; $i++): 
-                        $name = $myitems[$i]->get_name();
-                        $description = $myitems[$i]->get_description();
-                        $price = $myitems[$i]->get_price();
-                        $photo = $myitems[$i]->get_photo();
-                ?>
-                        <div class="food-card">
-                            <img class="food-image" src="<?= $photo ?>" alt="<?= $photo ?>"/>
-                            <p class="food-name margin-bot"><?=  $name ?></p>
-                            <p class="food-description margin-bot"><?= $description ?></p>
-                            <p class="food-description margin-bot">$<?= $price ?></p>
-                            <p>
-                                <select class="margin-bot select-box" name="sltItem_<?=$i?>" id="sltItem_<?=$i?>">
-                                    <?=  get_option($SelectMaxCnt, 'sltItem_'.$i.''); ?>
-                                </select>
-                                <input type="hidden" id="hid_name_<?= $i ?>" value="<?= $name ?>">
-                                <input type="hidden" id="hid_price_<?= $i ?>" value="<?= $price ?>">
-                            </p>
-                            <span id= "Sp<?= $i?>" class="text-red"></span>
-                        </div> <!-- end food-card-->
-                <?php 
-                    endfor; 
-                ?>      
-                
-            </form>
-            <!-- end of form -->
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" id="food">
+            <?php
+                for ($i = 0; $i <= count($myitems) - 1; $i++): 
+                    $name = $myitems[$i]->get_name();
+                    $description = $myitems[$i]->get_description();
+                    $price = $myitems[$i]->get_price();
+                    $photo = $myitems[$i]->get_photo();
+            ?>
+                    <div class="food-card">
+                        <img class="food-image" src="<?= $photo ?>" alt="<?= $photo ?>"/>
+                        <p class="food-name margin-bot"><?=  $name ?></p>
+                        <p class="food-description margin-bot"><?= $description ?></p>
+                        <p class="food-description margin-bot">$<?= $price ?></p>
+                        <p>
+                            <select class="margin-bot select-box" name="sltItem_<?=$i?>" id="sltItem_<?=$i?>">
+                                <?=  get_option($SelectMaxCnt, 'sltItem_'.$i.''); ?>
+                            </select>
+                            <input type="hidden" id="hid_name_<?= $i ?>" value="<?= $name ?>">
+                            <input type="hidden" id="hid_price_<?= $i ?>" value="<?= $price ?>">
+                        </p>
+                        <span id= "Sp<?= $i?>" class="text-red"></span>
+                    </div> <!-- end food-card-->
+            <?php 
+                endfor; 
+            ?>      
+            
+        </form><!-- end of form -->
         
         <div class="checkout">
             <h1 class="title">Checkout</h1>
@@ -117,32 +115,31 @@
 
             <!-- Calculate Button Submit: Calculate the final price and list what was ordered.-->
             <div class="button">
-                    <p><input class="calculate" type="submit" form="food" value="CHECK OUT"></p>
-                    <p><div class="calculate"><a class="reset" href="">RESET</a></div></p>
+                <p><input class="calculate" type="submit" form="food" value="CHECK OUT"></p>
+                <p><div class="calculate"><a class="reset" href="">RESET</a></div></p>
             </div>  
 
         </div><!-- end class checkout -->
-    </div> <!-- end of wrapper -->
-
-    <footer>
-        <ul>
-            <li>Copyright &copy;
-                <?php
-                $date_current = date('Y');
-                $date_created = 2022;
-                if ($date_current == $date_created) {
-                    echo $date_current;
-                } else {
-                    echo '' . $date_created . ' - ' . $date_current . '';
-                }
-                ?>
-            <li>All Rights Reserved</li>
-            <li><a href="https://github.com/krayzieeddi " target="_blank">Edwin Ho</a></li>
-            <li><a href="https://github.com/WChihWen" target="_blank">Chih Wen Wang</a></li>
-            <li><a href="https://github.com/ted-miller92" target="_blank">Ted Miller</a></li>
-            <li><a href="https://github.com/sea-hank" target="_blank">Yingheng he</a></li>
-        </ul>
-    </footer>
+        <footer>
+            <ul>
+                <li>Copyright &copy;
+                    <?php
+                    $date_current = date('Y');
+                    $date_created = 2022;
+                    if ($date_current == $date_created) {
+                        echo $date_current;
+                    } else {
+                        echo '' . $date_created . ' - ' . $date_current . '';
+                    }
+                    ?>
+                <li>All Rights Reserved</li>
+                <li><a href="https://github.com/krayzieeddi " target="_blank">Edwin Ho</a></li>
+                <li><a href="https://github.com/WChihWen" target="_blank">Chih Wen Wang</a></li>
+                <li><a href="https://github.com/ted-miller92" target="_blank">Ted Miller</a></li>
+                <li><a href="https://github.com/sea-hank" target="_blank">Yingheng he</a></li>
+            </ul>
+        </footer>
+    </div> <!-- end of wrapper -->    
 </body>
 </html>
 
